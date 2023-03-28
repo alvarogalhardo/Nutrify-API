@@ -6,12 +6,14 @@ import { loadEnv, connectDb, disconnectDB } from "@/config";
 loadEnv();
 
 import { handleApplicationErrors } from "@/middlewares";
+import authRouter from "@/routes/authorization.routes";
 
 const app = express();
 app
     .use(cors())
     .use(express.json())
     .get("/health", (_req, res) => res.send("OK!"))
+    .use(authRouter)
     .use(handleApplicationErrors);
 
 export function init(): Promise<Express> {

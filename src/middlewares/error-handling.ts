@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 export function handleApplicationErrors(err: ApplicationError | Error, _req: Request, res: Response) {
-
   if (err.name === "ConflictError" || err.name === "DuplicatedEmailError") {
     return res.status(httpStatus.CONFLICT).send({
       message: err.message,
@@ -22,8 +21,5 @@ export function handleApplicationErrors(err: ApplicationError | Error, _req: Req
     });
   }
 
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
-    error: "InternalServerError",
-    message: "Internal Server Error",
-  });
+  return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
 }

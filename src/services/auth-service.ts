@@ -1,4 +1,5 @@
-import { invalidCredentialsError } from "@/errors";
+import { invalidDataError,invalidCredentialsError } from "@/errors";
+import { conflictError } from "@/errors/conflict-error";
 import sessionRepository from "@/repositories/session-repository";
 import userRepository from "@/repositories/user-repository";
 import { exclude } from "@/utils";
@@ -8,7 +9,7 @@ import jwt from "jsonwebtoken";
 
 async function signIn(params: SignInParams): Promise<SignInResult> {
     const { email, password } = params;
-    const user = await getUserOrFail(email);
+    const user = await getUserOrFail(email);    
     await validatePasswordOrFail(password, user.password);
     const token = await createSession(user.id);
     return {
@@ -17,8 +18,23 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
     };
 }
 
+async function signUp(params:SignInParams):Promise<boolean>{
+    const {email,password} = params;
+    const user = {email,password};
+    const userExists = await userRepository.findByEmail(email)
+    if(userExists) throw conflictError();
+    user.password = await encryptPassword(password);
+    await userRepository.create(user);
+    return true 
+}
+
+async function encryptPassword(password:string){
+   return bcrypt.hashSync(password,10);
+}
+
+
 async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {
-    const user = await userRepository.findByEmail(email, { id: true, email: true, password: true });
+    const user = await userRepository.findByEmail(email, { id: true, email: true, password: true });    
     if (!user) throw invalidCredentialsError();
 
     return user;
@@ -45,10 +61,12 @@ export type SignInResult = {
     token: string;
 };
 
+
 type GetUserOrFailResult = Pick<User, "id" | "email" | "password">;
 
-const authenticationService = {
+export const authenticationService = {
     signIn,
+    signUp
 };
 
 export type SignInParams = Pick<User, "email" | "password">
