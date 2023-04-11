@@ -20,6 +20,5 @@ export function handleApplicationErrors(err: ApplicationError | Error, _req: Req
       message: err.message,
     });
   }
-
   return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
 }
