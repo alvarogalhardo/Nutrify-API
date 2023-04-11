@@ -3,15 +3,12 @@ import patientRepository from "@/repositories/patient-repository";
 import { Patient } from "@prisma/client";
 
 async function validatePatient(email: string) {
-    try {
-        const exists = await patientRepository.checkNewPatient(email)
-        if (exists) throw conflictError();
-    } catch (err) {
-        console.error(err)
-    }
+    const exists = await patientRepository.checkNewPatient(email)
+    if (exists) throw conflictError();
 }
 
-async function postNewPatient(data:Patient){
+async function postNewPatient(body: Patient, userId: number) {
+    const data = { ...body, userId };
     const newPatient = await patientRepository.postPatient(data);
     return newPatient
 }

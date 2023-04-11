@@ -15,9 +15,18 @@ async function postPatient(data:Patient){
     })
 }
 
+async function findUser(userId:number) {
+    return prisma.user.findUnique({
+        where: {
+            id:userId
+        }
+    })
+}
+
 const patientRepository = {
     checkNewPatient,
-    postPatient
+    postPatient,
+    findUser
 }
 
 export default patientRepository

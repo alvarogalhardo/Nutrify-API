@@ -6,4 +6,6 @@ export type ApplicationError = {
     message: string;
 };
 
-export type AuthenticatedRequest = Request & JwtPayload;
+export interface AuthenticatedRequest extends Request {
+    userId: number
+}

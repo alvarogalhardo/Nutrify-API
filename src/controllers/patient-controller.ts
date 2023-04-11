@@ -6,11 +6,11 @@ import httpStatus from "http-status";
 
 export async function postPatient(req: AuthenticatedRequest, res: Response) {
     const { email } = req.body as Patient;
+    const { userId } = req;
     try {
         await patientService.validatePatient(email);
-        const patient = await patientService.postNewPatient(req.body);
-        console.log(patient);
-        
+        await patientService.postNewPatient(req.body, userId);
+        return res.sendStatus(httpStatus.CREATED)
     } catch (err) {
         console.error(err)
         if (err.name === 'Conflict') return res.sendStatus(httpStatus.UNAUTHORIZED);

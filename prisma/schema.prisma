@@ -43,7 +43,7 @@ model Patient {
   User               User                 @relation(fields: [userId], references: [id])
   name               String               @db.VarChar(255)
   email              String               @db.VarChar(255) @unique
-  telephone          String               @db.VarChar(11)
+  telephone          String               @db.VarChar(13)
   birthday           DateTime              @db.Date()
   gender             Gender
   PhysicalAssessment PhysicalAssessment[]
