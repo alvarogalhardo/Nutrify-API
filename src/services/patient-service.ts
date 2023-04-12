@@ -13,8 +13,13 @@ async function postNewPatient(body: Patient, userId: number) {
     return newPatient
 }
 
+async function getAllPatients(userId:number){
+    const patients = await patientRepository.getPatients(userId);
+    return patients;
+}
 const patientService = {
     validatePatient,
-    postNewPatient
+    postNewPatient,
+    getAllPatients
 }
 export default patientService

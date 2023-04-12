@@ -23,10 +23,19 @@ async function findUser(userId:number) {
     })
 }
 
+async function getPatients(userId:number){
+    return prisma.patient.findMany({
+        where:{
+            userId
+        }
+    })
+}
+
 const patientRepository = {
     checkNewPatient,
     postPatient,
-    findUser
+    findUser,
+    getPatients
 }
 
 export default patientRepository

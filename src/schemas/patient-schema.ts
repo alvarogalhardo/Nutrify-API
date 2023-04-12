@@ -5,7 +5,8 @@ const patientSchema: ObjectSchema = Joi.object({
     telephone: Joi.string().required().max(13),
     email: Joi.string().email().required(),
     birthday: Joi.date().required(),
-    gender: Joi.valid("MALE", "FEMALE").required()
+    gender: Joi.valid("MALE", "FEMALE").required(),
+    userId: Joi.number().required()
 });
 
 export default patientSchema
