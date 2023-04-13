@@ -38,3 +38,15 @@ export async function getPatientById(req: AuthenticatedRequest, res: Response) {
         if (err.name === "Not Found") return res.sendStatus(httpStatus.NOT_FOUND);
     }
 }
+
+export async function deletePatientById(req: AuthenticatedRequest, res: Response) {
+    const { id } = req.params;
+    try {
+        const patient = await patientService.deletePatient(parseInt(id))
+        console.log(patient);
+        
+        return res.sendStatus(httpStatus.OK)
+    } catch (err) {
+        return res.sendStatus(httpStatus.NOT_FOUND)
+    }
+}

@@ -1,7 +1,7 @@
 import { prisma } from "@/config";
 import { Patient } from "@prisma/client";
 
- async function checkNewPatient(email: string) {
+async function checkNewPatient(email: string) {
     return prisma.patient.findUnique({
         where: {
             email
@@ -9,31 +9,39 @@ import { Patient } from "@prisma/client";
     })
 }
 
-async function postPatient(data:Patient){
+async function postPatient(data: Patient) {
     return prisma.patient.create({
         data
     })
 }
 
-async function findUser(userId:number) {
+async function findUser(userId: number) {
     return prisma.user.findUnique({
         where: {
-            id:userId
+            id: userId
         }
     })
 }
 
-async function getPatients(userId:number){
+async function getPatients(userId: number) {
     return prisma.patient.findMany({
-        where:{
+        where: {
             userId
         }
     })
 }
 
-async function  getPatient(id:number) {
+async function getPatient(id: number) {
     return prisma.patient.findUnique({
-        where:{
+        where: {
+            id
+        }
+    })
+}
+
+async function deletePatient(id: number) {
+    return prisma.patient.delete({
+        where: {
             id
         }
     })
@@ -44,7 +52,8 @@ const patientRepository = {
     postPatient,
     findUser,
     getPatients,
-    getPatient
+    getPatient,
+    deletePatient
 }
 
 export default patientRepository

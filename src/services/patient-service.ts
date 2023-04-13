@@ -16,8 +16,6 @@ async function postNewPatient(body: Patient, userId: number) {
 
 async function getAllPatients(userId: number) {
     const patients = await patientRepository.getPatients(userId);
-    console.log(patients);
-
     return patients;
 }
 
@@ -27,10 +25,17 @@ async function getPatient(id: number) {
     return patient
 }
 
+async function deletePatient(id: number) {
+    const deleted = await patientRepository.deletePatient(id)
+    if (!deleted) throw notFoundError()
+    return deleted
+}
+
 const patientService = {
     validatePatient,
     postNewPatient,
     getAllPatients,
-    getPatient
+    getPatient,
+    deletePatient
 }
 export default patientService
