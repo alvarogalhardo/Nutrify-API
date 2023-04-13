@@ -16,7 +16,7 @@ app
     .get("/health", (_req, res) => res.send("OK!"))
     .use(authRouter)
     .use(patientRouter)
-    .use(handleApplicationErrors);
+    .use(handleApplicationErrors)
 
 export function init(): Promise<Express> {
     connectDb();

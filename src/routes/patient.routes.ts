@@ -1,4 +1,4 @@
-import { getPatients, postPatient } from "@/controllers/patient-controller";
+import { getPatientById, getPatients, postPatient } from "@/controllers/patient-controller";
 import { validateBody } from "@/middlewares";
 import { authenticateToken } from "@/middlewares/authentication";
 import patientSchema from "@/schemas/patient-schema";
@@ -10,5 +10,6 @@ patientRouter
     .all("/*",authenticateToken)
     .post("/patients", validateBody(patientSchema),postPatient)
     .get("/patients", getPatients)
+    .get("/patients/:id",getPatientById)
 
 export default patientRouter
