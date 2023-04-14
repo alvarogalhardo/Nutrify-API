@@ -7,13 +7,13 @@ services:
     networks:
       - fullstack-network
     env_file:
-      - back-end/.env
+      - .env
     volumes:
       - postgres-volume:/var/lib/postgresql/data
 
   node:
     container_name: node
-    build: back-end/.
+    build: .
     image: fullstack/back-end
     networks:
       - fullstack-network
@@ -22,9 +22,12 @@ services:
     depends_on:
       - postgres
     env_file:
-      - back-end/.env
+      - .env
 
 networks:
   fullstack-network:
     name: fullstack-network
     driver: bridge
+
+volumes:
+  postgres-volume:
