@@ -12,7 +12,6 @@ export async function postPatient(req: AuthenticatedRequest, res: Response) {
         await patientService.postNewPatient(req.body, userId);
         return res.sendStatus(httpStatus.CREATED);
     } catch (err) {
-        console.error(err);
         if (err.name === 'Conflict') return res.sendStatus(httpStatus.CONFLICT);
         return res.sendStatus(httpStatus.BAD_REQUEST);
     }
@@ -42,9 +41,7 @@ export async function getPatientById(req: AuthenticatedRequest, res: Response) {
 export async function deletePatientById(req: AuthenticatedRequest, res: Response) {
     const { id } = req.params;
     try {
-        const patient = await patientService.deletePatient(parseInt(id))
-        console.log(patient);
-        
+        await patientService.deletePatient(parseInt(id))
         return res.sendStatus(httpStatus.OK)
     } catch (err) {
         return res.sendStatus(httpStatus.NOT_FOUND)

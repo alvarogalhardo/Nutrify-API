@@ -2,9 +2,10 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/src/server.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "build":"tsc",
+    "start": "npm run prisma:migrate:deploy && node dist/src/server.js",
     "test": "NODE_ENV=test jest --passWithNoTest --runInBand --detectOpenHandles",
     "test:coverage": "NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
     "test:migration:run": "npm run test:load-envs prisma migrate deploy",

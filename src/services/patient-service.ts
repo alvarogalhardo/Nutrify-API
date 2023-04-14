@@ -9,7 +9,7 @@ async function validatePatient(email: string) {
 }
 
 async function postNewPatient(body: Patient, userId: number) {
-    const data = { ...body, userId };
+    const data = { ... body, userId };
     const newPatient = await patientRepository.postPatient(data);
     return newPatient
 }
