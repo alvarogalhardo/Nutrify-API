@@ -5,9 +5,9 @@ import { loadEnv, connectDb, disconnectDB } from "@/config";
 
 loadEnv();
 
-import { handleApplicationErrors } from "@/middlewares";
 import authRouter from "@/routes/authorization.routes";
 import patientRouter from "./routes/patient.routes";
+import physicalRouter from "./routes/physical-assessment.routes";
 
 const app = express();
 app
@@ -16,6 +16,7 @@ app
     .get("/health", (_req, res) => res.send("OK!"))
     .use(authRouter)
     .use(patientRouter)
+    .use(physicalRouter)
 
 export function init(): Promise<Express> {
     connectDb();

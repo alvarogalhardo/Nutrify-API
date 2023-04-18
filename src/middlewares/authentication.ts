@@ -20,6 +20,8 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
         req.userId = userId;
         next();
     } catch (err) {
+        console.log(err);
+        
         return res.sendStatus(httpStatus.UNAUTHORIZED);
     }
 }

@@ -1,3 +1,4 @@
+import { BodyCircumference, BoneDiameter, PhysicalAssessment, SkinFolds } from "@prisma/client";
 import { Request } from "express";
 import { JwtPayload } from "jsonwebtoken";
 

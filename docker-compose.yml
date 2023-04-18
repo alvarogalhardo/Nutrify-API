@@ -5,7 +5,7 @@ services:
     ports:
       - 5433:5432
     networks:
-      - fullstack-network
+      - nutrify-network
     env_file:
       - .env
     volumes:
@@ -14,9 +14,9 @@ services:
   node:
     container_name: node
     build: .
-    image: fullstack/back-end
+    image: nutrify/back-end
     networks:
-      - fullstack-network
+      - nutrify-network
     ports:
       - 5000:5000
     depends_on:
@@ -25,8 +25,8 @@ services:
       - .env
 
 networks:
-  fullstack-network:
-    name: fullstack-network
+  nutrify-network:
+    name: nutrify-network
     driver: bridge
 
 volumes:

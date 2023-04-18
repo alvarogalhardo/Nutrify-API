@@ -42,28 +42,80 @@ model Patient {
   userId             Int
   User               User                 @relation(fields: [userId], references: [id])
   name               String               @db.VarChar(255)
-  email              String               @db.VarChar(255) @unique
+  email              String               @unique @db.VarChar(255)
   telephone          String               @db.VarChar(13)
-  birthday           DateTime              @db.Date()
+  birthday           DateTime             @db.Date()
   gender             Gender
   PhysicalAssessment PhysicalAssessment[]
-   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
 }
 
 model SkinFolds {
-  id                 Int                  @id @default(autoincrement())
-  PhysicalAssessment PhysicalAssessment[]
+  id                   Int                @id @default(autoincrement())
+  physicalAssessmentId Int
+  physicalAssessment   PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id])
+  triceps              Int
+  biceps               Int
+  abdominal            Int
+  subscapular          Int
+  midAxillary          Int
+  thigh                Int
+  thoracic             Int
+  calf                 Int
+  waist                Int
+  hip                  Int
+  suprailiac           Int
+  supraspinatus        Int
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+}
+
+model BodyCircumference {
+  id                                Int                @id @default(autoincrement())
+  physicalAssessmentId              Int
+  physicalAssessment                PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id])
+  neckCircumference                 Int
+  chestCircumference                Int
+  shoulderCircumference             Int
+  waistCircumference                Int
+  hipCircumference                  Int
+  abdomenCircumference              Int
+  relaxed_right_armCircumference    Int
+  contracted_right_armCircumference Int
+  relaxed_left_armCircumference     Int
+  contracted_left_armCircumference  Int
+  forearmCircumference              Int
+  thighCircumference                Int
+  calfCircumference                 Int
+  createdAt                         DateTime           @default(now())
+  updatedAt                         DateTime           @updatedAt
+}
+
+model BoneDiameter {
+  id                   Int                @id @default(autoincrement())
+  physicalAssessmentId Int
+  physicalAssessment   PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id])
+  humerus              Int
+  wrist                Int
+  femur                Int
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
 }
 
 model PhysicalAssessment {
-  id          Int       @id @default(autoincrement())
-  patientId   Int
-  Patient     Patient   @relation(fields: [patientId], references: [id])
-  weight      Int
-  height      Int
-  skinFoldsId Int
-  SkinFolds   SkinFolds @relation(fields: [skinFoldsId], references: [id])
+  id                Int                 @id @default(autoincrement())
+  patientId         Int
+  Patient           Patient             @relation(fields: [patientId], references: [id])
+  weight            Int
+  height            Int
+  sittingHeight     Int
+  kneeHeight        Int
+  SkinFolds         SkinFolds[]
+  BodyCircumference BodyCircumference[]
+  BoneDiameter      BoneDiameter[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
 }
 
 enum Gender {
