@@ -1,5 +1,5 @@
-import { AuthenticatedRequest } from "@/protocols";
-import physicalService from "@/services/physical-service";
+import { AuthenticatedRequest } from "../protocols";
+import physicalService from "../services/physical-service";
 import { BodyCircumference, BoneDiameter, PhysicalAssessment, SkinFolds } from "@prisma/client";
 import { Response } from "express";
 import httpStatus from "http-status";

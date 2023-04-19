@@ -1,5 +1,4 @@
-
-import physicalRepository from "@/repositories/physical-repository"
+import physicalRepository from "../repositories/physical-repository"
 
 import { BodyCircumference, BoneDiameter, PhysicalAssessment, SkinFolds } from "@prisma/client"
 

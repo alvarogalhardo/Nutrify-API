@@ -1,4 +1,4 @@
-import { prisma } from "@/config";
+import { prisma } from "../config/database";
 import { BodyCircumference, BoneDiameter, PhysicalAssessment, SkinFolds } from "@prisma/client";
 
 async function postPhysicalAssessment(data: PhysicalAssessment) {

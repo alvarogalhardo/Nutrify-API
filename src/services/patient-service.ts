@@ -1,6 +1,6 @@
-import { notFoundError } from "@/errors";
-import { conflictError } from "@/errors/conflict-error";
-import patientRepository from "@/repositories/patient-repository";
+import { notFoundError } from "../errors/not-found-error";
+import { conflictError } from "../errors/conflict-error";
+import patientRepository from "../repositories/patient-repository";
 import { Patient } from "@prisma/client";
 
 async function validatePatient(email: string) {

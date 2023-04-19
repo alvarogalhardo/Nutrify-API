@@ -1,7 +1,7 @@
-import { signUp, singIn } from "@/controllers/authentication-controller";
-import { validateBody } from "@/middlewares/validate-body";
-import signInSchema from "@/schemas/sign-in-schema";
-import signUpSchema from "@/schemas/sign-up-schema";
+import { signUp, singIn } from "../controllers/authentication-controller";
+import { validateBody } from "../middlewares/validate-body";
+import signInSchema from "../schemas/sign-in-schema";
+import signUpSchema from "../schemas/sign-up-schema";
 import { Router } from "express";
 
 const authRouter = Router();

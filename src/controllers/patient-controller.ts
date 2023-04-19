@@ -1,5 +1,5 @@
-import { AuthenticatedRequest } from "@/protocols";
-import patientService from "@/services/patient-service";
+import { AuthenticatedRequest } from "../protocols";
+import patientService from "../services/patient-service";
 import { Patient } from "@prisma/client";
 import { Response } from "express";
 import httpStatus from "http-status";

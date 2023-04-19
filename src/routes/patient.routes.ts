@@ -1,7 +1,7 @@
-import { deletePatientById, getPatientById, getPatients, postPatient } from "@/controllers/patient-controller";
-import { validateBody } from "@/middlewares";
-import { authenticateToken } from "@/middlewares/authentication";
-import patientSchema from "@/schemas/patient-schema";
+import { deletePatientById, getPatientById, getPatients, postPatient } from "../controllers/patient-controller";
+import { validateBody } from "../middlewares/validate-body";
+import { authenticateToken } from "../middlewares/authentication";
+import patientSchema from "../schemas/patient-schema";
 import { Router } from "express";
 
 const patientRouter = Router();

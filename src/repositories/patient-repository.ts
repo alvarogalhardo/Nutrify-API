@@ -1,4 +1,4 @@
-import { prisma } from "@/config";
+import { prisma } from "../config/database";
 import { Patient } from "@prisma/client";
 
 async function checkNewPatient(email: string) {

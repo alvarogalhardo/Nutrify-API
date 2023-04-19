@@ -1,11 +1,12 @@
 import "express-async-errors";
 import express, { Express } from "express";
 import cors from "cors";
-import { loadEnv, connectDb, disconnectDB } from "@/config";
+import { connectDb, disconnectDB } from "./config/database";
+import { loadEnv } from "./config/envs";
 
 loadEnv();
 
-import authRouter from "@/routes/authorization.routes";
+import authRouter from "./routes/authorization.routes";
 import patientRouter from "./routes/patient.routes";
 import physicalRouter from "./routes/physical-assessment.routes";
 

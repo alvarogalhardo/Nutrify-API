@@ -1,10 +1,10 @@
-import { postBodyCircumference, postBoneDiameter, postPhysicalAssessment, postSkinFolds } from "@/controllers/physical-controller";
-import { validateBody } from "@/middlewares";
-import { authenticateToken } from "@/middlewares/authentication";
-import bodyCircumferenceSchema from "@/schemas/body-circumference-schema";
-import boneDiameterSchema from "@/schemas/bone-diameter-schema";
-import physicalSchema from "@/schemas/physical-assessment-schema";
-import skinFoldsSchema from "@/schemas/skin-folds-schema";
+import { postBodyCircumference, postBoneDiameter, postPhysicalAssessment, postSkinFolds } from "../controllers/physical-controller";
+import { validateBody } from "../middlewares/validate-body";
+import { authenticateToken } from "../middlewares/authentication";
+import bodyCircumferenceSchema from "../schemas/body-circumference-schema";
+import boneDiameterSchema from "../schemas/bone-diameter-schema";
+import physicalSchema from "../schemas/physical-assessment-schema";
+import skinFoldsSchema from "../schemas/skin-folds-schema";
 import { Router } from "express";
 
 const physicalRouter = Router();
