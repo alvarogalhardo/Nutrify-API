@@ -6,6 +6,7 @@ import { exclude } from "../utils";
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { log } from "console";
 
 async function signIn(params: SignInParams): Promise<SignInResult> {
     const { email, password } = params;
@@ -45,7 +46,6 @@ async function encryptPassword(password: string) {
 async function getUser(email: string): Promise<GetUserOrFailResult> {
     const user = await userRepository.findByEmail(email, { id: true, email: true, password: true });
     if (!user) throw invalidCredentialsError();
-
     return user;
 }
 

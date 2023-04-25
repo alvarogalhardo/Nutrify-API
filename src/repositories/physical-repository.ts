@@ -28,12 +28,32 @@ async function postBoneDiameter(data: BoneDiameter, physicalAssessmentId: number
         }
     })
 }
+async function getPhysicalAssesssments(patientId: number) {
+    return prisma.physicalAssessment.findMany({
+        where: {
+            patientId
+        }
+    })
+}
+
+async function getPhysicalDetails(physicalId: number) {
+    return prisma.physicalAssessment.findUnique({
+        where: { id: physicalId },
+        include: {
+            'SkinFolds': true,
+            'BoneDiameter': true,
+            'BodyCircumference': true
+        }
+    })
+}
 
 
 const physicalRepository = {
     postPhysicalAssessment,
     postBodyCircumference,
     postSkinFolds,
-    postBoneDiameter
+    postBoneDiameter,
+    getPhysicalAssesssments,
+    getPhysicalDetails
 }
 export default physicalRepository

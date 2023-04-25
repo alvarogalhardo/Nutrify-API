@@ -31,7 +31,7 @@ enum Role {
 model Session {
   id        Int      @id @default(autoincrement())
   userId    Int
-  User      User     @relation(fields: [userId], references: [id])
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   token     String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -40,7 +40,7 @@ model Session {
 model Patient {
   id                 Int                  @id @default(autoincrement())
   userId             Int
-  User               User                 @relation(fields: [userId], references: [id])
+  User               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   name               String               @db.VarChar(255)
   email              String               @unique @db.VarChar(255)
   telephone          String               @db.VarChar(13)
@@ -54,7 +54,7 @@ model Patient {
 model SkinFolds {
   id                   Int                @id @default(autoincrement())
   physicalAssessmentId Int
-  physicalAssessment   PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id])
+  physicalAssessment   PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id], onDelete: Cascade)
   triceps              Int
   biceps               Int
   abdominal            Int
@@ -74,7 +74,7 @@ model SkinFolds {
 model BodyCircumference {
   id                                Int                @id @default(autoincrement())
   physicalAssessmentId              Int
-  physicalAssessment                PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id])
+  physicalAssessment                PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id], onDelete: Cascade)
   neckCircumference                 Int
   chestCircumference                Int
   shoulderCircumference             Int
@@ -95,7 +95,7 @@ model BodyCircumference {
 model BoneDiameter {
   id                   Int                @id @default(autoincrement())
   physicalAssessmentId Int
-  physicalAssessment   PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id])
+  physicalAssessment   PhysicalAssessment @relation(fields: [physicalAssessmentId], references: [id], onDelete: Cascade)
   humerus              Int
   wrist                Int
   femur                Int
@@ -106,7 +106,7 @@ model BoneDiameter {
 model PhysicalAssessment {
   id                Int                 @id @default(autoincrement())
   patientId         Int
-  Patient           Patient             @relation(fields: [patientId], references: [id])
+  Patient           Patient             @relation(fields: [patientId], references: [id], onDelete: Cascade)
   weight            Int
   height            Int
   sittingHeight     Int

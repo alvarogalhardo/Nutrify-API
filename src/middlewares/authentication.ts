@@ -20,8 +20,7 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
         req.userId = userId;
         next();
     } catch (err) {
-        console.log(err);
-        
+        console.log(`middleware`)
         return res.sendStatus(httpStatus.UNAUTHORIZED);
     }
 }

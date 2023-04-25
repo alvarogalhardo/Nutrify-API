@@ -1,4 +1,4 @@
-import { postBodyCircumference, postBoneDiameter, postPhysicalAssessment, postSkinFolds } from "../controllers/physical-controller";
+import { getAllPhysicalAssessments, getPhysicalDetailsById, postBodyCircumference, postBoneDiameter, postPhysicalAssessment, postSkinFolds } from "../controllers/physical-controller";
 import { validateBody } from "../middlewares/validate-body";
 import { authenticateToken } from "../middlewares/authentication";
 import bodyCircumferenceSchema from "../schemas/body-circumference-schema";
@@ -15,5 +15,7 @@ physicalRouter
     .post("/physical/body-circumference", validateBody(bodyCircumferenceSchema), postBodyCircumference)
     .post("/physical/bone-diameter", validateBody(boneDiameterSchema), postBoneDiameter)
     .post("/physical", validateBody(physicalSchema), postPhysicalAssessment)
+    .get('/physical/:id', getAllPhysicalAssessments)
+    .get('/physical/details/:id', getPhysicalDetailsById)
 
 export default physicalRouter;

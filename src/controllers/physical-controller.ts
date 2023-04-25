@@ -31,7 +31,6 @@ export async function postSkinFolds(req: AuthenticatedRequest, res: Response) {
 export async function postBoneDiameter(req: AuthenticatedRequest, res: Response) {
     const data = req.body as BoneDiameter;
     const { physicalId } = req.query as PhysicalIDQuery
-
     try {
         const result = await physicalService.postBoneDiameter(data, parseInt(physicalId))
         return res.status(httpStatus.CREATED).send(result)
@@ -50,6 +49,26 @@ export async function postBodyCircumference(req: AuthenticatedRequest, res: Resp
     } catch (err) {
         console.log(err);
         return res.sendStatus(httpStatus.BAD_REQUEST)
+    }
+}
+
+export async function getAllPhysicalAssessments(req: AuthenticatedRequest, res: Response) {
+    const { id } = req.params;
+    try {
+        const physicalAssessments = await physicalService.getAssessments(parseInt(id))
+        return res.status(httpStatus.OK).send(physicalAssessments)
+    } catch (err) {
+        return res.sendStatus(httpStatus.NO_CONTENT)
+    }
+}
+
+export async function getPhysicalDetailsById(req: AuthenticatedRequest, res: Response) {
+    const { id } = req.params;
+    try {
+        const details = physicalService.getPhysicalDetails(parseInt(id))
+        return res.status(httpStatus.OK).send(details)
+    } catch (err) {
+        return res.sendStatus(httpStatus.NOT_FOUND)
     }
 }
 

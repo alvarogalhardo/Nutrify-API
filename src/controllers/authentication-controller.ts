@@ -8,8 +8,7 @@ export async function singIn(req: Request, res: Response) {
         const result = await authenticationService.signIn({ email, password });
         return res.status(httpStatus.OK).send(result);
     } catch (error) {
-        console.log(error);
-        return res.sendStatus(httpStatus.UNAUTHORIZED);
+        return res.status(httpStatus.UNAUTHORIZED);
     }
 }
 
@@ -19,7 +18,6 @@ export async function signUp(req: Request, res: Response) {
         const user = await authenticationService.signUp({ email, password, name });
         return res.status(httpStatus.CREATED).send({ id: user.id, email: user.email });
     } catch (error) {
-        console.error(error);
         if (error.name === "Conflict") return res.sendStatus(httpStatus.CONFLICT);
         return res.sendStatus(httpStatus.BAD_REQUEST);
     }
